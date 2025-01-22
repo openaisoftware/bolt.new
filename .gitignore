@@ -29,3 +29,9 @@ dist-ssr
 *.vars
 .wrangler
 _worker.bundle
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
