@@ -6,6 +6,8 @@ import xtermStyles from '@xterm/xterm/css/xterm.css?url';
 import { useEffect } from 'react';
 import reactToastifyStyles from 'react-toastify/dist/ReactToastify.css?url';
 import { createHead } from 'remix-island';
+import { Tutorial } from './components/Tutorial';
+import { useTutorial } from './hooks/useTutorial';
 import { themeStore } from './lib/stores/theme';
 import globalStyles from './styles/index.scss?url';
 import { stripIndents } from './utils/stripIndent';
@@ -63,6 +65,7 @@ export const Head = createHead(() => (
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const theme = useStore(themeStore);
+  const { isTutorialOpen, closeTutorial, tutorialSteps } = useTutorial();
 
   useEffect(() => {
     document.querySelector('html')?.setAttribute('data-theme', theme);
@@ -71,6 +74,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       {children}
+      <Tutorial
+        steps={tutorialSteps}
+        isOpen={isTutorialOpen}
+        onClose={closeTutorial}
+      />
       <ScrollRestoration />
       <Scripts />
     </>
