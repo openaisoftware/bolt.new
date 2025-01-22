@@ -66,8 +66,13 @@ export const Workbench = memo(({ chatStarted, isStreaming }: WorkspaceProps) => 
   const unsavedFiles = useStore(workbenchStore.unsavedFiles);
   const files = useStore(workbenchStore.files);
   const selectedView = useStore(workbenchStore.currentView);
+  const isStreamingFromStore = useStore(workbenchStore.isStreaming);
   const [showGitHubModal, setShowGitHubModal] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
+
+  useEffect(() => {
+    workbenchStore.setIsStreaming(isStreaming ?? false);
+  }, [isStreaming]);
 
   const handleSyncFiles = useCallback(async () => {
     setIsSyncing(true);
@@ -221,7 +226,7 @@ export const Workbench = memo(({ chatStarted, isStreaming }: WorkspaceProps) => 
                 >
                   <EditorPanel
                     editorDocument={currentDocument}
-                    isStreaming={isStreaming}
+                    isStreaming={isStreamingFromStore}
                     selectedFile={selectedFile}
                     files={files}
                     unsavedFiles={unsavedFiles}

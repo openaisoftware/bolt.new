@@ -185,10 +185,43 @@ export class ActionRunner {
     }
 
     try {
-      await webcontainer.fs.writeFile(action.filePath, action.content);
-      logger.debug(`File written ${action.filePath}`);
-      workbenchStore.writeToBoltTerminal(`\x1b[1;32mFile created: ${action.filePath}\x1b[0m\n\n`);
+      // Create empty file first to show it in the workbench immediately
+      await webcontainer.fs.writeFile(action.filePath, '');
+      logger.debug(`Empty file created ${action.filePath}`);
+      workbenchStore.writeToBoltTerminal(`\x1b[1;32mFile created: ${action.filePath}\x1b[0m\n`);
+      
+      // Show the file in workbench
+      workbenchStore.setShowWorkbench(true);
+      workbenchStore.setSelectedFile(action.filePath);
+      workbenchStore.setIsStreaming(true);
+
+      // Stream the content
+      const chunks = action.content.split('');
+      let currentContent = '';
+      
+      for (const chunk of chunks) {
+        if (action.abortSignal.aborted) {
+          break;
+        }
+        
+        currentContent += chunk;
+        workbenchStore.setCurrentDocumentContent(currentContent);
+        
+        // Add a small delay to simulate streaming
+        await new Promise(resolve => setTimeout(resolve, 1));
+      }
+
+      // Ensure final content is set
+      if (!action.abortSignal.aborted) {
+        workbenchStore.setCurrentDocumentContent(action.content);
+        await webcontainer.fs.writeFile(action.filePath, action.content);
+      }
+
+      workbenchStore.setIsStreaming(false);
+      logger.debug(`File content streamed ${action.filePath}`);
+      workbenchStore.writeToBoltTerminal(`\x1b[1;32mFile content written: ${action.filePath}\x1b[0m\n\n`);
     } catch (error) {
+      workbenchStore.setIsStreaming(false);
       logger.error('Failed to write file\n\n', error);
       workbenchStore.writeToBoltTerminal(`\x1b[1;31mFailed to write file: ${action.filePath}\x1b[0m\n${error}\n\n`);
     }

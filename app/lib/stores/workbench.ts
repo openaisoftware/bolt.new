@@ -32,7 +32,7 @@ export class WorkbenchStore {
   #boltTerminalStore = new BoltTerminalStore(webcontainer);
 
   artifacts: Artifacts = import.meta.hot?.data.artifacts ?? map({});
-
+  isStreaming: WritableAtom<boolean> = import.meta.hot?.data.isStreaming ?? atom(false);
   showWorkbench: WritableAtom<boolean> = import.meta.hot?.data.showWorkbench ?? atom(false);
   currentView: WritableAtom<WorkbenchViewType> = import.meta.hot?.data.currentView ?? atom('code');
   unsavedFiles: WritableAtom<Set<string>> = import.meta.hot?.data.unsavedFiles ?? atom(new Set<string>());
@@ -45,6 +45,7 @@ export class WorkbenchStore {
       import.meta.hot.data.unsavedFiles = this.unsavedFiles;
       import.meta.hot.data.showWorkbench = this.showWorkbench;
       import.meta.hot.data.currentView = this.currentView;
+      import.meta.hot.data.isStreaming = this.isStreaming;
     }
   }
 
@@ -319,6 +320,16 @@ export class WorkbenchStore {
   #getArtifact(id: string) {
     const artifacts = this.artifacts.get();
     return artifacts[id];
+  }
+
+  setIsStreaming(streaming: boolean) {
+    this.isStreaming.set(streaming);
+  }
+
+  updateStreamingContent(filePath: string, content: string) {
+    this.setShowWorkbench(true);
+    this.setSelectedFile(filePath);
+    this.setCurrentDocumentContent(content);
   }
 }
 
