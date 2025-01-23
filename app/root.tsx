@@ -9,6 +9,7 @@ import { createHead } from 'remix-island';
 import { themeStore } from './lib/stores/theme';
 import globalStyles from './styles/index.scss?url';
 import { stripIndents } from './utils/stripIndent';
+import { AuthProvider } from './components/AuthProvider';
 
 import 'virtual:uno.css';
 
@@ -78,5 +79,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <AuthProvider>
+      <Outlet />
+    </AuthProvider>
+  );
 }
