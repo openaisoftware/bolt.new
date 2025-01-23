@@ -56,6 +56,8 @@
     "@radix-ui/react-separator": "^1.1.1",
     "@radix-ui/react-tooltip": "^1.1.6",
     "@remix-run/react": "^2.15.2",
+    "@supabase/auth-helpers-remix": "^0.4.0",
+    "@supabase/supabase-js": "^2.48.0",
     "@types/file-saver": "^2.0.7",
     "@types/js-cookie": "^3.0.6",
     "@uiw/codemirror-theme-vscode": "^4.23.7",
