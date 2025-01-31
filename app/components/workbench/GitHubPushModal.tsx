@@ -5,9 +5,10 @@ import { githubStore } from '~/lib/stores/github';
 interface GitHubPushModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSuccess?: (repoUrl: string) => void;
 }
 
-export function GitHubPushModal({ isOpen, onClose }: GitHubPushModalProps) {
+export function GitHubPushModal({ isOpen, onClose, onSuccess }: GitHubPushModalProps) {
   const [token, setToken] = useState('');
   const [username, setUsername] = useState('');
   const [repoName, setRepoName] = useState('');
@@ -19,6 +20,8 @@ export function GitHubPushModal({ isOpen, onClose }: GitHubPushModalProps) {
 
     try {
       await githubStore.pushToGitHub(token, username, repoName);
+      const repoUrl = `https://github.com/${username}/${repoName}`;
+      onSuccess?.(repoUrl);
       toast.success('Successfully pushed to GitHub!');
       onClose();
     } catch (error) {

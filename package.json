@@ -47,6 +47,7 @@
     "@codemirror/search": "^6.5.8",
     "@codemirror/state": "^6.5.1",
     "@codemirror/view": "^6.36.2",
+    "@headlessui/react": "^2.2.0",
     "@iconify-json/ph": "^1.2.2",
     "@iconify-json/svg-spinners": "^1.2.2",
     "@lezer/highlight": "^1.2.1",
