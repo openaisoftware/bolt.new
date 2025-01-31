@@ -8,6 +8,7 @@ import { memo, useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { EditorPanel } from './EditorPanel';
 import { GitHubPushModal } from './GitHubPushModal';
+import { NetlifyDeployModal } from './NetlifyDeployModal';
 import { Preview } from './Preview';
 import {
   type OnChangeCallback as OnEditorChange,
@@ -67,6 +68,8 @@ export const Workbench = memo(({ chatStarted, isStreaming }: WorkspaceProps) => 
   const files = useStore(workbenchStore.files);
   const selectedView = useStore(workbenchStore.currentView);
   const [showGitHubModal, setShowGitHubModal] = useState(false);
+  const [showNetlifyModal, setShowNetlifyModal] = useState(false);
+  const [repoUrl, setRepoUrl] = useState<string>();
   const [isSyncing, setIsSyncing] = useState(false);
 
   const handleSyncFiles = useCallback(async () => {
@@ -194,6 +197,10 @@ export const Workbench = memo(({ chatStarted, isStreaming }: WorkspaceProps) => 
                       <div className="i-ph:github-logo-bold" />
                       Push to GitHub
                     </PanelHeaderButton>
+                    <PanelHeaderButton className="mr-1 text-sm" onClick={() => setShowNetlifyModal(true)}>
+                      <div className="i-ph:cloud-arrow-up" />
+                      Deploy to Netlify
+                    </PanelHeaderButton>
                     <PanelHeaderButton
                       className="mr-1 text-sm"
                       onClick={() => {
@@ -242,7 +249,19 @@ export const Workbench = memo(({ chatStarted, isStreaming }: WorkspaceProps) => 
             </div>
           </div>
         </div>
-        <GitHubPushModal isOpen={showGitHubModal} onClose={() => setShowGitHubModal(false)} />
+        <GitHubPushModal 
+          isOpen={showGitHubModal} 
+          onClose={() => setShowGitHubModal(false)}
+          onSuccess={(url) => {
+            setRepoUrl(url);
+            toast.success('Successfully pushed to GitHub!');
+          }} 
+        />
+        <NetlifyDeployModal
+          isOpen={showNetlifyModal}
+          onClose={() => setShowNetlifyModal(false)}
+          repoUrl={repoUrl}
+        />
       </motion.div>
     )
   );
