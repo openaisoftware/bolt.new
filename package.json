@@ -60,7 +60,7 @@
     "@types/js-cookie": "^3.0.6",
     "@uiw/codemirror-theme-vscode": "^4.23.7",
     "@unocss/reset": "^65.4.3",
-    "@webcontainer/api": "1.5.1-internal.6",
+    "@webcontainer/api": "1.5.1-internal.8",
     "@xterm/addon-fit": "^0.10.0",
     "@xterm/addon-web-links": "^0.11.0",
     "@xterm/xterm": "^5.5.0",
