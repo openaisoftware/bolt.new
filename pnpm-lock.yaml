@@ -125,8 +125,8 @@ importers:
         specifier: ^65.4.3
         version: 65.4.3
       '@webcontainer/api':
-        specifier: 1.5.1-internal.6
-        version: 1.5.1-internal.6
+        specifier: 1.5.1-internal.8
+        version: 1.5.1-internal.8
       '@xterm/addon-fit':
         specifier: ^0.10.0
         version: 0.10.0(@xterm/xterm@5.5.0)
@@ -2349,8 +2349,8 @@ packages:
   '@web3-storage/multipart-parser@1.0.0':
     resolution: {integrity: sha512-BEO6al7BYqcnfX15W2cnGR+Q566ACXAT9UQykORCWW80lmkpWsnEob6zJS1ZVBKsSJC8+7vJkHwlp+lXG1UCdw==}
 
-  '@webcontainer/api@1.5.1-internal.6':
-    resolution: {integrity: sha512-HErRz351Wa2porp9AZAeKqzwyl9UIuj09hQyKLLzDdT+p/VOKyCeWghV0wBhuzJA1K4gExvyCzblnOPaJq0trg==}
+  '@webcontainer/api@1.5.1-internal.8':
+    resolution: {integrity: sha512-EgtnRLOIFhBiTS/1nQmg3A6RtQXvp+kDK08cbEZZpnXGyaNd1y9dSCJUEn3OUCuHSEZr3LeqBtwR5mYOxFeiUQ==}
 
   '@xterm/addon-fit@0.10.0':
     resolution: {integrity: sha512-UFYkDm4HUahf2lnEyHvio51TNGiLK66mqP2JoATy7hRZeXaGMRDr00JiSF7m63vR5WKATF605yEggJKsw0JpMQ==}
@@ -7797,7 +7797,7 @@ snapshots:
       '@babel/plugin-syntax-typescript': 7.25.9(@babel/core@7.26.7)
       '@vanilla-extract/babel-plugin-debug-ids': 1.2.0
       '@vanilla-extract/css': 1.17.1
-      esbuild: 0.17.6
+      esbuild: 0.17.19
       eval: 0.1.8
       find-up: 5.0.0
       javascript-stringify: 2.1.0
@@ -7916,7 +7916,7 @@ snapshots:
 
   '@web3-storage/multipart-parser@1.0.0': {}
 
-  '@webcontainer/api@1.5.1-internal.6': {}
+  '@webcontainer/api@1.5.1-internal.8': {}
 
   '@xterm/addon-fit@0.10.0(@xterm/xterm@5.5.0)':
     dependencies:
