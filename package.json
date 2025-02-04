@@ -114,7 +114,7 @@
     "vite-plugin-node-polyfills": "^0.23.0",
     "vite-plugin-optimize-css-modules": "^1.2.0",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.0.4",
+    "vitest": "^3.0.5",
     "wrangler": "3.106.0",
     "zod": "^3.24.1"
   },
